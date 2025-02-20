@@ -1,4 +1,4 @@
-# Лабораторная работа команды VAGNER
+# Лабораторная работа команды Los Pinguinos
 Команда:
 - [Козлов Артем](https://github.com/LibSyfer/ProgrammingMethods/tree/main/KozlovAD)
 - [Дьячков Денис](https://github.com/LibSyfer/ProgrammingMethods/tree/main/DenisDyachkov)
