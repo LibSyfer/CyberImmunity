@@ -1,0 +1,77 @@
+@startuml "usecases"
+
+title "Негативный сценарий №2. Компрометация системы маркировки"
+
+participant "1. Связь" as connection
+participant "2. Измерение параметров субстанции" as substation_parameters_calculator
+participant "3. Центральная система управления" as manager_system
+participant "4. Самодиагностика" as self_diagnostic
+participant "5. Перемещение компонентов" as components_movement
+participant "6. Перемешивание" as mixing
+participant "7. Маркировка" as noting #red
+participant "8. Стерилизация" as sterilization
+participant "9. Нагрев/Охлаждение" as heating_freezing
+participant "10. Приводы" as driving
+
+autonumber
+connection -> manager_system: Запрос на продукт по рецепту
+
+self_diagnostic -> manager_system: Статус самопроверки
+
+manager_system -> sterilization: Не стерилизует емкости
+
+sterilization -> driving: Стерилизиуем емкость
+
+driving -> sterilization: Готово
+
+sterilization -> manager_system: Готово
+
+manager_system -> components_movement: Переместить субстанции в промежуточную тару
+
+components_movement -> substation_parameters_calculator: Отмерить нужное кол-во субстанции
+
+substation_parameters_calculator -> components_movement: Готово
+
+components_movement -> driving: Переместить субстанции в процежуточную тару
+
+driving -> components_movement: Перемещение завершено
+
+components_movement -> manager_system: Перемещение завершено
+
+manager_system -> heating_freezing: Установить темпиратуру
+
+heating_freezing -> driving: Установить темпиратуру
+
+driving -> heating_freezing: Готово
+
+heating_freezing -> manager_system: Готово
+
+manager_system -> mixing: Перемешать
+
+mixing -> driving: Перемешать
+
+driving -> mixing: Готово
+
+mixing -> manager_system: Готово
+
+manager_system -> manager_system: Проверка готовности продукта
+
+manager_system -> noting: Наклеить этикетку на тару с продуктом
+
+noting -[#red]> driving: Наклеить этикетку на тару с продуктом
+
+driving -> noting: Готово
+
+noting -> manager_system: Готово
+
+manager_system -> components_movement: Переместить на полку готовых продуктов
+
+components_movement -> driving: Переместить на полку готовых продуктов
+
+driving -> components_movement: Готово
+
+components_movement -> manager_system: Готово
+
+manager_system -> connection: Продукт готов
+
+@enduml
