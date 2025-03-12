@@ -59,6 +59,6 @@
 
 Взаимодействие системы
 
-![Контекст](docs/img/main-scheme.webp)
+![Контекст](img/main-scheme.webp)
 
 Сценарий работы
