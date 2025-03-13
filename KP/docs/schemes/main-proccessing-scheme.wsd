@@ -1,0 +1,18 @@
+@startuml "usecases"
+
+title "Базовый сценарий. Производство томатов"
+
+actor "1. Агроном-оператор" as operator
+participant "2. Система планирования выращивания" as growing_manager_system
+participant "3. Система управления теплицей" as greenhouse_manager_system
+participant "3. Самодиагностика" as self_diagnostic
+participant "5. База данных сортов помидоров" as tomato_db
+participant "6. Логистическая система" as logistics_system
+
+autonumber
+operator -> growing_manager_system: Запрос на выращивание
+
+growing_manager_system -> greenhouse_manager_system: Запрос на выращивание в свободной теплице
+
+
+@enduml
