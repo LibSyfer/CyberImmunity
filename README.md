@@ -7,6 +7,9 @@
 
 ## Итоги
 ### Лабраторная работа №1
-- [Козлов Артем](https://github.com/LibSyfer/ProgrammingMethods/tree/main/Lab1-KozlovAD) ✅
-- [Дьячков Денис](https://github.com/LibSyfer/ProgrammingMethods/tree/main/Lab1-DenisDyachkov) ✅
-- [Царицин Никита](https://github.com/LibSyfer/ProgrammingMethods/tree/main/Lab1-NikitaTsaritsin) ✅
+- [Козлов Артем](Lab1-KozlovAD) ✅
+- [Дьячков Денис](Lab1-DenisDyachkov) ✅
+- [Царицин Никита](Lab1-NikitaTsaritsin) ✅
+
+### Лабораторная работа №2
+- [Робот-фармацевт](Lab2) ✅
