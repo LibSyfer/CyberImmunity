@@ -1,0 +1,42 @@
+@startuml "usecases"
+
+title "Базовый сценарий. Производство томатов"
+
+actor "1. Агроном-оператор" as operator
+participant "2. База данных сортов помидоров" as tomato_db
+participant "3. Система планирования выращивания" as growing_manager_system
+participant "4. Система управления теплицей" as greenhouse_manager_system
+participant "5. Климат-контроль" as climate_control
+participant "6. Система искусственного освещения" as lighting_system
+participant "7. Система орошения" as irrigation_system
+participant "8. Система сборки урожая" as harvest_system
+participant "9. Система мониторинга зрелости" as maturity_monitoring_system
+
+autonumber
+operator -> tomato_db: Запрос идентификатора сорта помидоров
+tomato_db -> operator: Получение идентификатора
+
+operator -> growing_manager_system: Запрос на выращивание
+growing_manager_system -> greenhouse_manager_system: Отправка запроса на выращивание\n в свободной теплице с идентификатором сорта
+
+greenhouse_manager_system -> tomato_db: Запрос на получение параметров среды\n по идентификатору сорта
+tomato_db -> greenhouse_manager_system: Получение параметров
+
+greenhouse_manager_system -> climate_control: Передача параметров необходимого климата
+climate_control -> climate_control: Проверка текущих параметров с необходимыми\n и изменение если необходимо
+
+greenhouse_manager_system -> lighting_system: Передача параметров необходимого освещения
+lighting_system -> lighting_system: Проверка текущих параметров с необходимыми\n и изменение если необходимо
+
+greenhouse_manager_system -> irrigation_system: Передача параметров необходимого орошения
+irrigation_system -> irrigation_system: Проверка текущих параметров с необходимыми\n и изменение если необходимо
+
+maturity_monitoring_system -> maturity_monitoring_system: Проверка зрелости плодов
+maturity_monitoring_system -> greenhouse_manager_system: Плоды созрели
+
+greenhouse_manager_system -> harvest_system: Запрос на сборку плодов
+harvest_system -> greenhouse_manager_system: Плоды собраны
+
+greenhouse_manager_system -> growing_manager_system: Продукция на складе
+
+@enduml
