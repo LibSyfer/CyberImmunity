@@ -1,0 +1,34 @@
+@startuml "usecases"
+
+title "Базовый сценарий.\n Заказ на выращивание определенного сорта помидоров."
+
+participant "1. Овощной магазин" as vegetable_shop
+participant "2. Логистическая система" as logistics_system
+actor "3. Агроном-оператор" as operator
+participant "4. База данных сортов помидоров" as tomato_db
+participant "5. Система планирования выращивания" as growing_manager_system
+participant "6. Теплица" as greenhouse
+
+autonumber
+vegetable_shop -> operator: Заказ на производство томатов
+
+operator -> tomato_db: Запрос идентификатора сорта помидоров
+tomato_db -> operator: Получение идентификатора
+
+operator -> growing_manager_system: Запрос на выращивание
+growing_manager_system -> greenhouse: Отправка запроса на выращивание\n в свободной теплице с идентификатором сорта
+
+greenhouse -> tomato_db: Запрос на получение параметров среды\n по идентификатору сорта
+tomato_db -> greenhouse: Получение параметров выращивания
+
+greenhouse -> greenhouse: Установка параметров среды
+
+loop
+greenhouse -> greenhouse: проверка условий выращивания
+end
+
+greenhouse -> growing_manager_system: Продукция собрана. Находится на складе
+
+growing_manager_system -> logistics_system: Сообщение о готовности продукции
+
+@enduml
