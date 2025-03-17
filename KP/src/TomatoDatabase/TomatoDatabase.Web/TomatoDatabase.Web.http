@@ -1,0 +1,19 @@
+@TomatoDatabase.Web_HostAddress = http://localhost:5176
+@TestTomatoId = 715CD946-D92F-4B80-B1FF-1ED7F42387DA
+@TestTomatoParamsId = df30dbec-e088-4a62-a788-a023ed744029
+
+GET {{TomatoDatabase.Web_HostAddress}}/tomatos/
+Accept: application/json
+
+###
+
+
+GET {{TomatoDatabase.Web_HostAddress}}/tomatos/{{TestTomato}}/growing-params
+Accept: appication/json
+
+###
+
+GET {{TomatoDatabase.Web_HostAddress}}/tomatos/{{TestTomato}}/growing-params/{{TestTomatoParamsId}}
+Accept: application/json
+
+###
