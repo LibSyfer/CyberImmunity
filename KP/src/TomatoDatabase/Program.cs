@@ -75,22 +75,33 @@ var tomatoGrowingParams = new[]
     }
 };
 
+var logger = LoggerFactory.Create(config =>
+{
+    config.AddConsole();
+}).CreateLogger("TomatoDatabase");
+
 app.MapGet("/tomatos", () =>
 {
+    logger.LogInformation("[GET] /tomatos");
+
     return tomatos;
 });
 
 app.MapGet("/tomatos/{tomatoId}/growing-params", (Guid tomatoId) =>
 {
+    logger.LogInformation($"[GET] /tomatos/{tomatoId}/growing-params");
+
     var growingParamsList = tomatoGrowingParams.Where(e => e.TomatoId == tomatoId).ToList();
     return Results.Ok(growingParamsList);
 });
 
 app.MapGet("/tomatos/{tomatoId}/growing-params/{paramsId}", (Guid tomatoId, Guid paramsId) =>
 {
+    logger.LogInformation($"[GET] /tomatos/{tomatoId}/growing-params/{paramsId}");
     var growingParams = tomatoGrowingParams.Where(e => e.TomatoId == tomatoId && e.Id == paramsId).FirstOrDefault();
     if (growingParams == null)
     {
+        logger.LogInformation($"Not found");
         return Results.NotFound();
     }
 
