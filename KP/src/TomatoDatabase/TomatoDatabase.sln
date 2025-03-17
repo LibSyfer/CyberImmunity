@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35825.156 d17.13
+VisualStudioVersion = 17.13.35825.156
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomatoDatabase.Web", "TomatoDatabase.Web\TomatoDatabase.Web.csproj", "{D0ECA597-F2A2-4F32-94CD-36763FD49C75}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomatoDatabase", "TomatoDatabase.csproj", "{980887E7-D1A7-0553-7644-450AD1432A89}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D0ECA597-F2A2-4F32-94CD-36763FD49C75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D0ECA597-F2A2-4F32-94CD-36763FD49C75}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D0ECA597-F2A2-4F32-94CD-36763FD49C75}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D0ECA597-F2A2-4F32-94CD-36763FD49C75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{980887E7-D1A7-0553-7644-450AD1432A89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{980887E7-D1A7-0553-7644-450AD1432A89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{980887E7-D1A7-0553-7644-450AD1432A89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{980887E7-D1A7-0553-7644-450AD1432A89}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
