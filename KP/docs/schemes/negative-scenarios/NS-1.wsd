@@ -4,7 +4,7 @@ title "Негативный сценарий 1. Компрометация це�
 
 participant "Система планирования выращивания" as growing_manager_system
 participant "2. Связь с базой данных сортов помидоров" as tomato_db_connection
-participant "1. Система управления теплицей" as greenhouse_manager_system
+participant "1. Система управления теплицей" as greenhouse_manager_system #red
 participant "3. Система искусственного освещения" as lighting_system
 participant "4. Климат-контроль" as climate_control
 participant "5. Система мониторинга зрелости" as maturity_monitoring_system
