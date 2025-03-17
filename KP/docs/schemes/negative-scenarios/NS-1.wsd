@@ -18,6 +18,9 @@ growing_manager_system -> greenhouse_manager_system: Отправка запро
 greenhouse_manager_system -> tomato_db: Запрос на получение параметров среды\n по идентификатору сорта
 tomato_db -> greenhouse_manager_system: Получение параметров
 
+greenhouse_manager_system -[#red]> seed_planting_system: Посадка семян
+seed_planting_system -> greenhouse_manager_system: Семена посажены
+
 greenhouse_manager_system -[#red]> climate_control: Передача параметров необходимого климата
 climate_control -> climate_control: Проверка текущих параметров с необходимыми\n и изменение если необходимо
 
