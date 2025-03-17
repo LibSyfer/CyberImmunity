@@ -1,6 +1,6 @@
 @startuml "usecases"
 
-title "Негативный сценарий 1. Компрометация центральной системы управления теплицей.\n Подмена параметра освещенности. Нарушение ЦБ 1, 2, 3, 4"
+title "Негативный сценарий 4. Компрометация центральной системы управления теплицей.\n Отправка управляющей команды о сборе урожая до его готовности. Нарушение ЦБ 1, 4"
 
 participant "Система планирования выращивания" as growing_manager_system
 participant "2. Связь с базой данных сортов помидоров" as tomato_db_connection
@@ -25,16 +25,16 @@ seed_planting_system -> greenhouse_manager_system: Семена посажены
 greenhouse_manager_system -> climate_control: Передача параметров необходимого климата
 climate_control -> climate_control: Проверка текущих параметров с необходимыми\n и изменение если необходимо
 
-greenhouse_manager_system -[#red]> lighting_system: Передача неверных параметров освещения
+greenhouse_manager_system -> lighting_system: Передача параметров необходимого освещения
 lighting_system -> lighting_system: Проверка текущих параметров с необходимыми\n и изменение если необходимо
 
 greenhouse_manager_system -> irrigation_system: Передача параметров необходимого орошения
 irrigation_system -> irrigation_system: Проверка текущих параметров с необходимыми\n и изменение если необходимо
 
 maturity_monitoring_system -> maturity_monitoring_system: Проверка зрелости плодов
-maturity_monitoring_system -> greenhouse_manager_system: Плоды созрели
+maturity_monitoring_system -[#red]> greenhouse_manager_system: Плоды созрели
 
-greenhouse_manager_system -> harvest_system: Запрос на сборку плодов
+greenhouse_manager_system -[#red]> harvest_system: Запрос на сборку плодов (плоды еще в стадии роста)
 harvest_system -> greenhouse_manager_system: Плоды собраны
 
 greenhouse_manager_system -> growing_manager_system: Продукция на складе
