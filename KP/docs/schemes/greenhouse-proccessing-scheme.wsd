@@ -3,7 +3,7 @@
 title "Выполнение задания по выращиванию"
 
 participant "Система планирования выращивания" as growing_manager_system
-participant "База данных сортов помидоров" as tomato_db
+participant "2. Связь с базой данных сортов помидоров" as tomato_db_connection
 participant "1. Система управления теплицей" as greenhouse_manager_system
 participant "3. Система искусственного освещения" as lighting_system
 participant "4. Климат-контроль" as climate_control
@@ -16,8 +16,8 @@ autonumber
 
 growing_manager_system -> greenhouse_manager_system: Отправка запроса на выращивание\n в свободной теплице с идентификатором сорта
 
-greenhouse_manager_system -> tomato_db: Запрос на получение параметров среды\n по идентификатору сорта
-tomato_db -> greenhouse_manager_system: Получение параметров
+greenhouse_manager_system -> tomato_db_connection: Запрос на получение параметров среды\n по идентификатору сорта
+tomato_db_connection -> greenhouse_manager_system: Получение параметров
 
 greenhouse_manager_system -> seed_planting_system: Посадка семян
 seed_planting_system -> greenhouse_manager_system: Семена посажены
