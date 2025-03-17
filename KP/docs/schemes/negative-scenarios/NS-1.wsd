@@ -2,21 +2,22 @@
 
 title "Негативный сценарий 1. Компрометация центральной системы управления теплицей.\n Нарушение ЦБ 1, 2, 3, 4"
 
-participant "1. Система планирования выращивания" as growing_manager_system
+participant "Система планирования выращивания" as growing_manager_system
 participant "2. Связь с базой данных сортов помидоров" as tomato_db_connection
-participant "3. Система управления теплицей" as greenhouse_manager_system #red
+participant "1. Система управления теплицей" as greenhouse_manager_system
+participant "3. Система искусственного освещения" as lighting_system
 participant "4. Климат-контроль" as climate_control
-participant "5. Система искусственного освещения" as lighting_system
+participant "5. Система мониторинга зрелости" as maturity_monitoring_system
 participant "6. Система орошения" as irrigation_system
 participant "7. Система сборки урожая" as harvest_system
-participant "8. Система мониторинга зрелости" as maturity_monitoring_system
+participant "8. Система посадки семян" as seed_planting_system
 
 autonumber
 
 growing_manager_system -> greenhouse_manager_system: Отправка запроса на выращивание\n в свободной теплице с идентификатором сорта
 
-greenhouse_manager_system -> tomato_db: Запрос на получение параметров среды\n по идентификатору сорта
-tomato_db -> greenhouse_manager_system: Получение параметров
+greenhouse_manager_system -> tomato_db_connection: Запрос на получение параметров среды\n по идентификатору сорта
+tomato_db_connection -> greenhouse_manager_system: Получение параметров
 
 greenhouse_manager_system -[#red]> seed_planting_system: Посадка семян
 seed_planting_system -> greenhouse_manager_system: Семена посажены
