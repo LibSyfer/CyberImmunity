@@ -7,6 +7,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Greenhouse.Coordinator", "G
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Greenhouse.SecurityMonitor", "Greenhouse.SecurityMonitor\Greenhouse.SecurityMonitor.csproj", "{5B58FBDC-B17B-4DD8-B7BD-1AC9A3A2BD8B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Greenhouse.EventBus", "Greenhouse.EventBus\Greenhouse.EventBus.csproj", "{9750FAE9-5055-7F73-FA14-E73F4A44090D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Greenhouse.EventBus.RabbitMQ", "Greenhouse.EventBus.RabbitMQ\Greenhouse.EventBus.RabbitMQ.csproj", "{5CB6C366-1013-06E1-6A6A-C12A40B15525}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EventBus", "EventBus", "{36D591C7-65C7-A0D1-1CBC-10CDE441BDC8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{5A002587-BB21-49AC-9E6B-215258F04872}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,9 +29,22 @@ Global
 		{5B58FBDC-B17B-4DD8-B7BD-1AC9A3A2BD8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B58FBDC-B17B-4DD8-B7BD-1AC9A3A2BD8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B58FBDC-B17B-4DD8-B7BD-1AC9A3A2BD8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9750FAE9-5055-7F73-FA14-E73F4A44090D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9750FAE9-5055-7F73-FA14-E73F4A44090D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9750FAE9-5055-7F73-FA14-E73F4A44090D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9750FAE9-5055-7F73-FA14-E73F4A44090D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CB6C366-1013-06E1-6A6A-C12A40B15525}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CB6C366-1013-06E1-6A6A-C12A40B15525}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CB6C366-1013-06E1-6A6A-C12A40B15525}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CB6C366-1013-06E1-6A6A-C12A40B15525}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{29089C2F-9CAB-7D8C-0A96-54567F08F8D8} = {5A002587-BB21-49AC-9E6B-215258F04872}
+		{9750FAE9-5055-7F73-FA14-E73F4A44090D} = {36D591C7-65C7-A0D1-1CBC-10CDE441BDC8}
+		{5CB6C366-1013-06E1-6A6A-C12A40B15525} = {36D591C7-65C7-A0D1-1CBC-10CDE441BDC8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BDC28687-8FE3-42C8-BCA6-585469B91852}
