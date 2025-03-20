@@ -10,10 +10,13 @@ namespace Greenhouse.Coordinator.Service
         private CancellationTokenSource? _cancellationTokenSource;
         private readonly object _lock = new();
 
-        public CoordinatorService(ILogger<CoordinatorService> logger)
+        private readonly DatabaseNetModule _databaseNetModule;
+
+        public CoordinatorService(ILogger<CoordinatorService> logger, DatabaseNetModule databaseNetModule)
         {
             _logger = logger;
             _isBuzy = false;
+            _databaseNetModule = databaseNetModule;
         }
 
         public bool IsBuzy => _isBuzy;
@@ -37,19 +40,9 @@ namespace Greenhouse.Coordinator.Service
 
         private async Task DoGrowingFlow(Guid paramsId, CancellationToken cancellationToken)
         {
-            var growingParams = await GetGrowingParams(paramsId, cancellationToken);
+            var growingParams = await _databaseNetModule.GetGrowingParamsAsync(paramsId, cancellationToken);
 
             // last step
-        }
-
-        private Task<GrowingParams> GetGrowingParams(Guid paramsId, CancellationToken cancellationToken)
-        {
-            // Get params from Database
-
-            return Task.FromResult(new GrowingParams
-            {
-                Id = Guid.NewGuid()
-            });
         }
     }
 }

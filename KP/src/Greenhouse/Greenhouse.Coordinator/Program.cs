@@ -1,8 +1,9 @@
-using Greenhouse.Coordinator;
+using Greenhouse.Coordinator.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton<CoordinatorService>();
+builder.Services.AddSingleton<DatabaseNetModule>();
 
 builder.Services.AddSwaggerGen();
 
@@ -24,12 +25,14 @@ app.MapGet("/status", (CoordinatorService coordinatorService) =>
 .WithDisplayName("status")
 .WithOpenApi();
 
-app.MapPost("/growing", (Guid paramsId) =>
+app.MapPost("/growing", (CoordinatorService coordinatorService, Guid paramsId) =>
 {
-    return Results.Ok(new
+    var isSuccess = coordinatorService.StartGrowing(paramsId);
+    if (!isSuccess)
     {
-        GrowindId = Guid.NewGuid()
-    });
+        return Results.BadRequest();
+    }
+    return Results.Ok();
 })
 .WithDisplayName("growing")
 .WithOpenApi();
