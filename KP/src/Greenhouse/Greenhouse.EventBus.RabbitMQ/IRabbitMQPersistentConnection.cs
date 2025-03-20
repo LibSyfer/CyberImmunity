@@ -9,5 +9,5 @@ public interface IRabbitMQPersistentConnection
 
     bool TryConnect();
 
-    IChannel CreateCannel();
+    Task<IChannel> CreateCannelAsync(CancellationToken cancellationToken = default);
 }
