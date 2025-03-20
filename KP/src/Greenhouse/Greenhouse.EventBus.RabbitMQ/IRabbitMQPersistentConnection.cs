@@ -7,7 +7,7 @@ public interface IRabbitMQPersistentConnection
 {
     bool IsConnected { get; }
 
-    bool TryConnect();
+    Task<bool> TryConnectAsync(CancellationToken cancellationToken = default);
 
     Task<IChannel> CreateCannelAsync(CancellationToken cancellationToken = default);
 }
