@@ -1,13 +1,13 @@
 ﻿using Greenhouse.Coordinator.Models;
 
-namespace Greenhouse.Coordinator
+namespace Greenhouse.Coordinator.Service
 {
     public class CoordinatorService
     {
         private readonly ILogger<CoordinatorService> _logger;
         private bool _isBuzy;
         private Task? _currentGrowingTask;
-        private CancellationTokenSource _cancellationTokenSource;
+        private CancellationTokenSource? _cancellationTokenSource;
         private readonly object _lock = new();
 
         public CoordinatorService(ILogger<CoordinatorService> logger)
