@@ -2,29 +2,28 @@
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
-namespace Greenhouse.EventBus.RabbitMQ
+namespace Greenhouse.MessageBus.RabbitMQ
 {
-    class DefaultRabbitMQPersistentConnection : IRabbitMQPersistentConnection
+    public class DefaultRabbitMQPersistentConnection : IRabbitMQPersistentConnection
     {
-        private readonly IConnectionFactory _connectionFactory;
+        private IConnectionFactory _connectionFactory;
         private readonly ILogger<DefaultRabbitMQPersistentConnection> _logger;
-        private readonly int _retryCount;
         private IConnection? _connection;
         private bool _disposed;
 
         private readonly object _sync = new();
-        
-        public DefaultRabbitMQPersistentConnection(IConnectionFactory connectionFactory, ILogger<DefaultRabbitMQPersistentConnection> logger, int retryCount = 5)
+
+        public DefaultRabbitMQPersistentConnection(
+            IConnectionFactory connectionFactory,
+            ILogger<DefaultRabbitMQPersistentConnection> logger)
         {
-            _connectionFactory = connectionFactory ?? throw new ArgumentNullException(nameof(connectionFactory));
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _retryCount = retryCount;
-            _disposed = false;
+            _connectionFactory = connectionFactory;
+            _logger = logger;
         }
 
         public bool IsConnected => _connection != null && _connection.IsOpen && !_disposed;
 
-        public async Task<IChannel> CreateCannelAsync(CancellationToken cancellationToken = default)
+        public async Task<IChannel> CreateChannelAsync(CancellationToken cancellationToken = default)
         {
             if (!IsConnected)
             {
@@ -32,14 +31,6 @@ namespace Greenhouse.EventBus.RabbitMQ
             }
 
             return await _connection!.CreateChannelAsync(cancellationToken: cancellationToken);
-        }
-
-        public void Dispose()
-        {
-            if (_disposed) return;
-
-            _disposed = true;
-            _connection?.Dispose();
         }
 
         public async Task<bool> TryConnectAsync(CancellationToken cancellationToken = default)
@@ -52,7 +43,8 @@ namespace Greenhouse.EventBus.RabbitMQ
             {
                 _connection = newConnection;
 
-                if (IsConnected) {
+                if (IsConnected)
+                {
                     _connection.ConnectionShutdownAsync += OnConnectionShutdownAsync;
                     _connection.CallbackExceptionAsync += OnCallbackExceptionAsync;
                     _connection.ConnectionBlockedAsync += OnConnectionBlocked;
@@ -68,6 +60,14 @@ namespace Greenhouse.EventBus.RabbitMQ
                     return false;
                 }
             }
+        }
+
+        public void Dispose()
+        {
+            if (_disposed) return;
+
+            _disposed = true;
+            _connection?.Dispose();
         }
 
         private async Task OnConnectionShutdownAsync(object sender, ShutdownEventArgs args)

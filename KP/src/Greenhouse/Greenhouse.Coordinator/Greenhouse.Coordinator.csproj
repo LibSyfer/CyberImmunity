@@ -11,4 +11,8 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Greenhouse.MessageBus.RabbitMQ\Greenhouse.MessageBus.RabbitMQ.csproj" />
+  </ItemGroup>
+
 </Project>

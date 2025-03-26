@@ -1,9 +1,16 @@
+using Greenhouse.Coordinator.Messages;
 using Greenhouse.Coordinator.Service;
+using Greenhouse.MessageBus.Extensions;
+using Greenhouse.MessageBus.RabbitMQ.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton<CoordinatorService>();
 builder.Services.AddSingleton<DatabaseNetModule>();
+
+builder.AddBaseRabbitMqServices()
+        .ConfigureClientMessageBus()
+        .RegisterMessageHandler<TestMessage, TestMessageHandler();
 
 builder.Services.AddSwaggerGen();
 
