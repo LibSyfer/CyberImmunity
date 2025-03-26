@@ -1,3 +1,4 @@
+using Greenhouse.Coordinator.MessageHandlers;
 using Greenhouse.Coordinator.Messages;
 using Greenhouse.Coordinator.Service;
 using Greenhouse.MessageBus.Extensions;
@@ -10,8 +11,9 @@ builder.Services.AddSingleton<DatabaseNetModule>();
 
 builder.AddBaseRabbitMqServices()
         .ConfigureClientMessageBus()
-        .RegisterMessageHandler<TestMessage, TestMessageHandler();
+        .RegisterMessageHandler<TestMessage, TestMessageHandler>();
 
+builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
@@ -42,6 +44,12 @@ app.MapPost("/growing", (CoordinatorService coordinatorService, Guid paramsId) =
     return Results.Ok();
 })
 .WithDisplayName("growing")
+.WithOpenApi();
+
+app.MapGet("/test", () => {
+    return "Ok";
+})
+.WithDisplayName("Test")
 .WithOpenApi();
 
 app.Run();

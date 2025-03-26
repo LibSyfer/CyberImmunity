@@ -2,6 +2,6 @@
 {
     public interface IMonitorMessageHandler
     {
-        Task Handle(IDictionary<string, object?> metadata, object payload, CancellationToken cancellationToken = default);
+        Task Handle(IDictionary<string, object?> metadata, ReadOnlyMemory<byte> payload, CancellationToken cancellationToken = default);
     }
 }

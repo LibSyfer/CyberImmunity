@@ -11,19 +11,12 @@ namespace Greenhouse.MessageBus.RabbitMQ
         public const string MESSAGE_QUEUE = "MESSAGE_QUEUE";
         public const string MESSAGE_EXCHANGE = "MESSAGE_EXCHANGE";
 
-        private IConnectionFactory _connectionFactory;
-        private readonly ILogger<DefaultRabbitMQPersistentConnection> _logger;
-        private IConnection? _connection;
-        private bool _disposed;
+        private readonly IRabbitMQPersistentConnection _persistentConnection;
+        private readonly ILogger<MonitorMessageBusRabbitMQ> _logger;
+        private readonly IServiceProvider _serviceProvider;
+        private IChannel? _consumerChannel;
 
         public Task SendAsync(string destination, IntegrationMessage message, CancellationToken cancellationToken = default)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task Subscribe<T, TH>()
-            where T : IntegrationMessage
-            where TH : IIntegrationMessageHandler<T>
         {
             throw new NotImplementedException();
         }

@@ -2,6 +2,6 @@
 {
     public interface IMonitorMessageBus
     {
-        Task ResendAsync(string destination, ReadOnlyMemory<byte> payload, CancellationToken cancellationToken = default);
+        Task ResendAsync(string destination, string actionName, ReadOnlyMemory<byte> payload, CancellationToken cancellationToken = default);
     }
 }

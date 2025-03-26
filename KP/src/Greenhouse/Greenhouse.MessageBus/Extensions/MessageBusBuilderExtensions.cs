@@ -6,7 +6,7 @@ namespace Greenhouse.MessageBus.Extensions
 {
     public static class MessageBusBuilderExtensions
     {
-        public static IMessageBusBuilder RegisterMonitorHandler<T>(this IMessageBusBuilder messageBusBuilder)
+        public static IMonitorMessageBusBuilder RegisterMonitorHandler<T>(this IMonitorMessageBusBuilder messageBusBuilder)
             where T : class, IMonitorMessageHandler
         {
             messageBusBuilder.Services.AddTransient<IMonitorMessageHandler, T>();
@@ -14,9 +14,9 @@ namespace Greenhouse.MessageBus.Extensions
             return messageBusBuilder;
         }
 
-        public static IMessageBusBuilder RegisterMessageHandler<T, TH>(this IMessageBusBuilder messageBusBuilder)
+        public static IClientMessageBusBuilder RegisterMessageHandler<T, TH>(this IClientMessageBusBuilder messageBusBuilder)
             where T: IntegrationMessage
-            where TH : class, IIntegrationMessageHandler<T>
+            where TH: class, IIntegrationMessageHandler<T>
         {
             messageBusBuilder.Services.AddKeyedTransient<IIntegrationMessageHandler<T>, TH>(typeof(T));
 

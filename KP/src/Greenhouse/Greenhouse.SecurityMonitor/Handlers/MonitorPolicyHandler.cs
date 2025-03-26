@@ -1,4 +1,5 @@
 ﻿using Greenhouse.MessageBus.Abstractions;
+using Greenhouse.MessageBus.RabbitMQ.Extensions;
 
 namespace Greenhouse.SecurityMonitor.Handlers
 {
@@ -11,9 +12,27 @@ namespace Greenhouse.SecurityMonitor.Handlers
             _logger = logger;
         }
 
-        public Task Handle(IDictionary<string, object?> metadata, object payload, CancellationToken cancellationToken = default)
+        public Task Handle(IDictionary<string, object?> metadata, ReadOnlyMemory<byte> payload, CancellationToken cancellationToken = default)
         {
             _logger.LogInformation($"Handling message metadata: {metadata}");
+
+            var monitorHeaders = metadata.ReadMonitorHeaders();
+
+            var authorizeAction = false;
+
+            if (monitorHeaders.ActionName.Equals("Test", StringComparison.OrdinalIgnoreCase) 
+                && monitorHeaders.Source.Equals("Coordinator", StringComparison.OrdinalIgnoreCase)
+                && monitorHeaders.Destination.Equals("Coordinator", StringComparison.OrdinalIgnoreCase))
+                authorizeAction = true;
+
+            if (authorizeAction)
+            {
+                _logger.LogInformation($"[Action: {monitorHeaders.ActionName}] [Source: {monitorHeaders.Source}] [Destination: {monitorHeaders.Destination}] allowed");
+            }
+            else
+            {
+                _logger.LogWarning($"[Action: {monitorHeaders.ActionName}] [Source: {monitorHeaders.Source}] [Destination: {monitorHeaders.Destination}] rejected");
+            }
 
             return Task.CompletedTask;
         }

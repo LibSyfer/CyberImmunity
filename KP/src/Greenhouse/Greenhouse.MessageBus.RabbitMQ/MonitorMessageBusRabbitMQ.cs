@@ -25,7 +25,7 @@ namespace Greenhouse.MessageBus.RabbitMQ
             _serviceProvider = serviceProvider;
         }
 
-        public async Task ResendAsync(string destination, ReadOnlyMemory<byte> payload, CancellationToken cancellationToken = default)
+        public async Task ResendAsync(string destination, string actionName, ReadOnlyMemory<byte> payload, CancellationToken cancellationToken = default)
         {
             if (!_persistentConnection.IsConnected)
             {
@@ -35,15 +35,15 @@ namespace Greenhouse.MessageBus.RabbitMQ
             using (var channel = await _persistentConnection.CreateChannelAsync(cancellationToken))
             {
                 await channel.ExchangeDeclareAsync(
-                    exchange: MessageBusRabbitMQ.MESSAGE_EXCHANGE,
+                    exchange: destination,
                     type: "direct",
                     cancellationToken: cancellationToken
                     );
 
 
                 await channel.BasicPublishAsync(
-                        exchange: MessageBusRabbitMQ.MESSAGE_EXCHANGE,
-                        routingKey: destination,
+                        exchange: destination,
+                        routingKey: actionName,
                         mandatory: true,
                         basicProperties: new BasicProperties(),
                         body: payload,
@@ -141,10 +141,13 @@ namespace Greenhouse.MessageBus.RabbitMQ
         {
             await using var scope = _serviceProvider.CreateAsyncScope();
 
-            var monitorHandler = scope.ServiceProvider.GetService<IMonitorMessageHandler>();
-            if (monitorHandler is not null)
+            var monitorHandlers = scope.ServiceProvider.GetServices<IMonitorMessageHandler>();
+            if (monitorHandlers is not null)
             {
-                await monitorHandler.Handle(args.BasicProperties.Headers ?? new Dictionary<string, object?>(), args.Body, args.CancellationToken);
+                foreach (var handler in monitorHandlers) {
+                    await handler.Handle(args.BasicProperties.Headers ?? new Dictionary<string, object?>(), args.Body, args.CancellationToken);
+                    await Task.Yield();
+                }
             }
             else
             {

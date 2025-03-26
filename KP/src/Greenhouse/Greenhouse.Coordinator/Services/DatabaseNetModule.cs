@@ -5,13 +5,11 @@ namespace Greenhouse.Coordinator.Service
     public class DatabaseNetModule
     {
         private readonly ILogger<DatabaseNetModule> _logger;
-        private readonly HttpClient _httpClient;
         private const string DatabaseUrl = "http://TomatoDatabase:8080";
 
-        public DatabaseNetModule(ILogger<DatabaseNetModule> logger, HttpClient httpClient)
+        public DatabaseNetModule(ILogger<DatabaseNetModule> logger)
         {
             _logger = logger;
-            _httpClient = httpClient;
         }
 
         public Task<GrowingParams> GetGrowingParamsAsync(Guid paramsId, CancellationToken cancellationToken)

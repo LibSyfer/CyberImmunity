@@ -42,12 +42,12 @@ namespace Greenhouse.MessageBus.RabbitMQ.Extensions
             return new MessageBusBuilder(builder.Services);
         }
 
-        public static IMessageBusBuilder ConfigureClientMessageBus(this IMessageBusBuilder messageBusBuilder)
+        public static IClientMessageBusBuilder ConfigureClientMessageBus(this IMessageBusBuilder messageBusBuilder)
         {
-            return messageBusBuilder;
+            return new ClientMessageBusBuilder(messageBusBuilder.Services);
         }
 
-        public static IMessageBusBuilder ConfigureMonitorMessageBus(this IMessageBusBuilder messageBusBuilder)
+        public static IMonitorMessageBusBuilder ConfigureMonitorMessageBus(this IMessageBusBuilder messageBusBuilder)
         {
             messageBusBuilder.Services.AddSingleton<IMonitorMessageBus, MonitorMessageBusRabbitMQ>(sp =>
             {
@@ -59,10 +59,20 @@ namespace Greenhouse.MessageBus.RabbitMQ.Extensions
 
             messageBusBuilder.Services.AddSingleton<IHostedService>(sp => (MonitorMessageBusRabbitMQ)sp.GetRequiredService<IMonitorMessageBus>());
 
-            return messageBusBuilder;
+            return new MonitorMessageBusBuilder(messageBusBuilder.Services);
         }
 
         private class MessageBusBuilder(IServiceCollection services) : IMessageBusBuilder
+        {
+            public IServiceCollection Services => services;
+        }
+
+        private class ClientMessageBusBuilder(IServiceCollection services) : IClientMessageBusBuilder
+        {
+            public IServiceCollection Services => services;
+        }
+
+        private class MonitorMessageBusBuilder(IServiceCollection services) : IMonitorMessageBusBuilder
         {
             public IServiceCollection Services => services;
         }

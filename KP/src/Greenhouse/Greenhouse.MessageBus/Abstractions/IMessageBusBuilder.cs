@@ -6,4 +6,13 @@ namespace Greenhouse.MessageBus.Abstractions
     {
         public IServiceCollection Services { get; }
     }
+
+    public interface IClientMessageBusBuilder
+    {
+        public IServiceCollection Services { get; }
+    }
+    public interface IMonitorMessageBusBuilder
+    {
+        public IServiceCollection Services { get; }
+    }
 }
