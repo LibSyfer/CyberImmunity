@@ -1,6 +1,9 @@
 ﻿using Microsoft.Extensions.Logging;
+using Polly;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using RabbitMQ.Client.Exceptions;
+using System.Net.Sockets;
 
 namespace Greenhouse.MessageBus.RabbitMQ
 {
@@ -9,16 +12,19 @@ namespace Greenhouse.MessageBus.RabbitMQ
         private IConnectionFactory _connectionFactory;
         private readonly ILogger<DefaultRabbitMQPersistentConnection> _logger;
         private IConnection? _connection;
+        private readonly int _retryCount;
         private bool _disposed;
 
         private readonly object _sync = new();
 
         public DefaultRabbitMQPersistentConnection(
             IConnectionFactory connectionFactory,
-            ILogger<DefaultRabbitMQPersistentConnection> logger)
+            ILogger<DefaultRabbitMQPersistentConnection> logger,
+            int retryCount = 5)
         {
             _connectionFactory = connectionFactory;
             _logger = logger;
+            _retryCount = retryCount;
         }
 
         public bool IsConnected => _connection != null && _connection.IsOpen && !_disposed;
@@ -37,7 +43,25 @@ namespace Greenhouse.MessageBus.RabbitMQ
         {
             _logger.LogInformation("RabbitMQ Client is trying to connect");
 
-            var newConnection = await _connectionFactory.CreateConnectionAsync(cancellationToken: cancellationToken);
+            var policy = Policy.Handle<SocketException>()
+                    .Or<BrokerUnreachableException>()
+                    .WaitAndRetryAsync(_retryCount, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)), (ex, time) =>
+                    {
+                        _logger.LogWarning("RabbitMQ Client could not connect after {TimeOut}s ({ExceptionMessage})", $"{time.TotalSeconds:n1}", ex.Message);
+                    }
+                );
+
+            IConnection? newConnection = null;
+            await policy.ExecuteAsync(async () =>
+            {
+                newConnection = await _connectionFactory.CreateConnectionAsync(cancellationToken: cancellationToken);
+            });
+
+            if (newConnection is null)
+            {
+                _logger.LogCritical("FATAL ERROR: RabbitMQ connections could not be created and opened");
+                return false;
+            }
 
             lock(_sync)
             {
