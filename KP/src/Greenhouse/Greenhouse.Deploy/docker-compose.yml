@@ -1,0 +1,28 @@
+services:
+  rabbitmq-brocker:
+    image: rabbitmq:4.0.7-management
+    hostname: rabbitmq-brocker
+    ports:
+      - 15672:15672
+      - 5672:5672
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "check_port_connectivity"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  greenhouse.coordinator:
+    build:
+      context: ..
+      dockerfile: Greenhouse.Coordinator/Dockerfile
+    depends_on:
+        rabbitmq-brocker:
+            condition: service_healthy
+
+  greenhouse.security-monitor:
+    build:
+      context: ..
+      dockerfile: Greenhouse.SecurityMonitor/Dockerfile
+    depends_on:
+        rabbitmq-brocker:
+            condition: service_healthy
