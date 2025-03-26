@@ -23,6 +23,8 @@ services:
     build:
       context: ..
       dockerfile: Greenhouse.SecurityMonitor/Dockerfile
+    environment:
+        MessageBusConnection__RabbitMQ__Host: rabbitmq-brocker
     depends_on:
         rabbitmq-brocker:
             condition: service_healthy
