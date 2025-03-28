@@ -1,7 +1,6 @@
-using Greenhouse.Coordinator.MessageHandlers;
-using Greenhouse.Coordinator.Messages;
 using Greenhouse.Coordinator.Service;
-using Greenhouse.MessageBus.Extensions;
+using Greenhouse.MessageBus.Abstractions;
+using Greenhouse.MessageBus.Messages;
 using Greenhouse.MessageBus.RabbitMQ.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,8 +9,7 @@ builder.Services.AddSingleton<CoordinatorService>();
 builder.Services.AddSingleton<DatabaseNetModule>();
 
 builder.AddBaseRabbitMqServices()
-        .ConfigureClientMessageBus()
-        .RegisterMessageHandler<TestMessage, TestMessageHandler>();
+        .ConfigureClientMessageBus("CoordinatorModule");
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -34,8 +32,9 @@ app.MapGet("/status", (CoordinatorService coordinatorService) =>
 .WithDisplayName("status")
 .WithOpenApi();
 
-app.MapPost("/growing", (CoordinatorService coordinatorService, Guid paramsId) =>
+app.MapPost("/growing", async (CoordinatorService coordinatorService, IMessageBus messageBus, Guid paramsId, CancellationToken cancellationToken) =>
 {
+
     var isSuccess = coordinatorService.StartGrowing(paramsId);
     if (!isSuccess)
     {
