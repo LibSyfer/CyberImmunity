@@ -32,14 +32,19 @@ namespace Greenhouse.MessageBus.RabbitMQ
                 await _persistentConnection.TryConnectAsync(cancellationToken: cancellationToken);
             }
 
+            _logger.LogTrace("Creating RabbitMQ channel to send verified message: {ActionName}", actionName);
+
             using (var channel = await _persistentConnection.CreateChannelAsync(cancellationToken))
             {
+                _logger.LogTrace("Declaring RabbitMQ destination service exchange [{ExchangeName}] to send verified message: {ActionName}", destination, actionName);
+
                 await channel.ExchangeDeclareAsync(
                     exchange: destination,
                     type: "direct",
                     cancellationToken: cancellationToken
                     );
 
+                _logger.LogTrace("Send message to RabbitMQ: {ActionName}", actionName);
 
                 await channel.BasicPublishAsync(
                         exchange: destination,
@@ -54,6 +59,7 @@ namespace Greenhouse.MessageBus.RabbitMQ
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
+            _logger.LogInformation("Starting RabbitMQ connection");
             _consumerChannel = await CreateConsumerChannelAsync(cancellationToken);
             await StartBasicConsumeAsync(cancellationToken);
         }
@@ -141,12 +147,13 @@ namespace Greenhouse.MessageBus.RabbitMQ
         {
             await using var scope = _serviceProvider.CreateAsyncScope();
 
-            var monitorHandlers = scope.ServiceProvider.GetServices<IMonitorMessageHandler>();
-            if (monitorHandlers is not null)
+            var handlers = scope.ServiceProvider.GetServices<IMonitorMessageHandler>();
+            if (handlers is not null)
             {
-                foreach (var handler in monitorHandlers) {
-                    await handler.Handle(args.BasicProperties.Headers ?? new Dictionary<string, object?>(), args.Body, args.CancellationToken);
+                foreach (var handler in handlers) {
                     await Task.Yield();
+                    _logger.LogTrace("Processing RabbitMQ message with handler: {MessageHandler}", nameof(handler));
+                    await handler.Handle(args.BasicProperties.Headers ?? new Dictionary<string, object?>(), args.Body, args.CancellationToken);
                 }
             }
             else
