@@ -1,4 +1,7 @@
+using Greenhouse.Coordinator.MessageHandlers;
 using Greenhouse.Coordinator.Service;
+using Greenhouse.MessageBus.Extensions;
+using Greenhouse.MessageBus.Messages;
 using Greenhouse.MessageBus.RabbitMQ.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,7 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<CoordinatorService>();
 
 builder.AddBaseRabbitMqServices()
-        .ConfigureClientMessageBus("CoordinatorModule");
+        .ConfigureClientMessageBus("CoordinatorModule")
+        .RegisterMessageHandler<SendGrowingParams, SendGrowingParamsHandler>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
