@@ -42,8 +42,17 @@ namespace Greenhouse.MessageBus.RabbitMQ.Extensions
             return new MessageBusBuilder(builder.Services);
         }
 
-        public static IClientMessageBusBuilder ConfigureClientMessageBus(this IMessageBusBuilder messageBusBuilder)
+        public static IClientMessageBusBuilder ConfigureClientMessageBus(this IMessageBusBuilder messageBusBuilder, string clientName)
         {
+            messageBusBuilder.Services.AddSingleton<IMessageBus, MessageBusRabbitMQ>(sp =>
+            {
+                var rabbitMQPersistentConnection = sp.GetRequiredService<IRabbitMQPersistentConnection>();
+                var logger = sp.GetRequiredService<ILogger<MessageBusRabbitMQ>>();
+                var registerOptions = sp.GetRequiredService<IOptions<MessageBusRegister>>();
+
+                return new MessageBusRabbitMQ(rabbitMQPersistentConnection, logger, sp, registerOptions, clientName);
+            });
+
             return new ClientMessageBusBuilder(messageBusBuilder.Services);
         }
 
