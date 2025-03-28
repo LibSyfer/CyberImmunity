@@ -1,4 +1,6 @@
 ﻿using Greenhouse.Coordinator.Models;
+using Greenhouse.MessageBus.Abstractions;
+using Greenhouse.MessageBus.Messages;
 
 namespace Greenhouse.Coordinator.Service
 {
@@ -10,12 +12,15 @@ namespace Greenhouse.Coordinator.Service
         private CancellationTokenSource? _cancellationTokenSource;
         private readonly object _lock = new();
 
+        private readonly IMessageBus _messageBus;
+
         private readonly DatabaseNetModule _databaseNetModule;
 
-        public CoordinatorService(ILogger<CoordinatorService> logger, DatabaseNetModule databaseNetModule)
+        public CoordinatorService(ILogger<CoordinatorService> logger, IMessageBus messageBus, DatabaseNetModule databaseNetModule)
         {
             _logger = logger;
             _isBuzy = false;
+            _messageBus = messageBus;
             _databaseNetModule = databaseNetModule;
         }
 
@@ -32,17 +37,19 @@ namespace Greenhouse.Coordinator.Service
 
                 _cancellationTokenSource = new CancellationTokenSource();
 
-                _currentGrowingTask = Task.Run(async () => await DoGrowingFlow(paramsId, _cancellationTokenSource.Token), _cancellationTokenSource.Token);
+                _currentGrowingTask = Task.Run(async () =>
+                {
+                    _logger.LogInformation("Start growing");
+
+                    _logger.LogInformation("Getting growing params.");
+                    await _messageBus.SendAsync("DatabaseNetModule", new GetGrowingParams
+                    {
+                        ParamsId = paramsId
+                    });
+                });
             }
 
             return true;
-        }
-
-        private async Task DoGrowingFlow(Guid paramsId, CancellationToken cancellationToken)
-        {
-            var growingParams = await _databaseNetModule.GetGrowingParamsAsync(paramsId, cancellationToken);
-
-            // last step
         }
     }
 }
