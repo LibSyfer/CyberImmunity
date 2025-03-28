@@ -1,4 +1,4 @@
-﻿using Greenhouse.MessageBus.Events;
+﻿using Greenhouse.MessageBus.Messages;
 
 namespace Greenhouse.MessageBus.Abstractions
 {

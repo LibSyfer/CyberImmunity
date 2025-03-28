@@ -1,4 +1,4 @@
-﻿namespace Greenhouse.MessageBus.Events
+﻿namespace Greenhouse.MessageBus.Messages
 {
     public class IntegrationMessage
     {

@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using System.Text.Json;
 using Greenhouse.MessageBus.Abstractions;
-using Greenhouse.MessageBus.Events;
+using Greenhouse.MessageBus.Messages;
 using Greenhouse.MessageBus.RabbitMQ.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
