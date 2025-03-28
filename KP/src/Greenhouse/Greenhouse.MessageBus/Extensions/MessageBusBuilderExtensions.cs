@@ -18,7 +18,12 @@ namespace Greenhouse.MessageBus.Extensions
             where T: IntegrationMessage
             where TH: class, IIntegrationMessageHandler<T>
         {
-            messageBusBuilder.Services.AddKeyedTransient<IIntegrationMessageHandler<T>, TH>(typeof(T));
+            messageBusBuilder.Services.AddKeyedTransient<IIntegrationMessageHandler, TH>(typeof(T));
+
+            messageBusBuilder.Services.Configure<MessageBusRegister>(r =>
+            {
+                r.MessageTypes[typeof(T).Name] = typeof(T);
+            });
 
             return messageBusBuilder;
         }
