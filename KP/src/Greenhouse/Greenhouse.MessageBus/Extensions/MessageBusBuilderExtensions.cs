@@ -1,5 +1,5 @@
 ﻿using Greenhouse.MessageBus.Abstractions;
-using Greenhouse.MessageBus.Events;
+using Greenhouse.MessageBus.Messages;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Greenhouse.MessageBus.Extensions
