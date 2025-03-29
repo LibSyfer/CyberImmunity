@@ -5,13 +5,14 @@ using Greenhouse.MessageBus.RabbitMQ.Extensions;
 using Greenhouse.SeedPlantingSystem.MessageHandlers;
 using Greenhouse.SeedPlantingSystem.Models;
 using Greenhouse.SeedPlantingSystem.Services;
+using Greenhouse.Share;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton<SeedingStateService>();
 
 builder.AddBaseRabbitMqServices()
-        .ConfigureClientMessageBus("SeedPlantingSystem")
+        .ConfigureClientMessageBus(Services.SeedPlantingModule)
         .RegisterMessageHandler<StartSeedingCommand, StartSeedingCommandHandler>();
 
 builder.Services.AddEndpointsApiExplorer();
@@ -70,7 +71,7 @@ app.MapPost("/finish-seeding", async (SeedingStateService seedingStateService, I
     {
         seedingStateService.FinishSeeding();
 
-        await messageBus.SendAsync("CoordinatorModule", new SeedingFinishCommand(), cancellationToken);
+        await messageBus.SendAsync(Services.CoordinatorModule, new SeedingFinishCommand(), cancellationToken);
 
         return Results.Ok("Закончилась высадка семян");
     }
