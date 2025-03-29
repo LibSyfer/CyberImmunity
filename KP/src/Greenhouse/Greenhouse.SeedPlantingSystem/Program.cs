@@ -1,3 +1,4 @@
+using Greenhouse.MessageBus.Abstractions;
 using Greenhouse.MessageBus.Extensions;
 using Greenhouse.MessageBus.Messages.SeedPlantingSystem;
 using Greenhouse.MessageBus.RabbitMQ.Extensions;
@@ -62,12 +63,14 @@ app.MapPost("/start-seeding", (SeedingStateService seedingStateService) =>
     return Results.BadRequest($"Нельзя начать высадку из состояния: {seedingState.ToString()}");
 });
 
-app.MapPost("/finish-seeding", (SeedingStateService seedingStateService) =>
+app.MapPost("/finish-seeding", async (SeedingStateService seedingStateService, IMessageBus messageBus, CancellationToken cancellationToken) =>
 {
     var seedingState = seedingStateService.State;
     if (seedingState == SeedingState.Active)
     {
         seedingStateService.FinishSeeding();
+
+        await messageBus.SendAsync("CoordinatorModule", new SeedingFinishCommand(), cancellationToken);
 
         return Results.Ok("Закончилась высадка семян");
     }
