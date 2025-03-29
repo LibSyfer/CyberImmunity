@@ -53,6 +53,8 @@ namespace Greenhouse.MessageBus.RabbitMQ.Extensions
                 return new MessageBusRabbitMQ(rabbitMQPersistentConnection, logger, sp, registerOptions, clientName);
             });
 
+            messageBusBuilder.Services.AddSingleton<IHostedService>(sp => (MessageBusRabbitMQ)sp.GetRequiredService<IMessageBus>());
+
             return new ClientMessageBusBuilder(messageBusBuilder.Services);
         }
 
