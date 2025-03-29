@@ -14,14 +14,11 @@ namespace Greenhouse.Coordinator.Service
 
         private readonly IMessageBus _messageBus;
 
-        private readonly DatabaseNetModule _databaseNetModule;
-
-        public CoordinatorService(ILogger<CoordinatorService> logger, IMessageBus messageBus, DatabaseNetModule databaseNetModule)
+        public CoordinatorService(ILogger<CoordinatorService> logger, IMessageBus messageBus)
         {
             _logger = logger;
             _isBuzy = false;
             _messageBus = messageBus;
-            _databaseNetModule = databaseNetModule;
         }
 
         public bool IsBuzy => _isBuzy;
