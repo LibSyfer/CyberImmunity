@@ -1,0 +1,6 @@
+@Greenhouse.SeedPlantingSystem_HostAddress = http://localhost:5081
+
+GET {{Greenhouse.SeedPlantingSystem_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
