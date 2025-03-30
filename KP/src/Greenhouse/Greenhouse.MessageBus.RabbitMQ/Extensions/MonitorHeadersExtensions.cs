@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace Greenhouse.MessageBus.RabbitMQ.Extensions;
 
 public static class MonitorHeadersExtensions
@@ -13,28 +15,19 @@ public static class MonitorHeadersExtensions
     {
         var monitorHeaders = new MonitorHeaders();
 
-        if (headers.TryGetValue(nameof(MonitorHeaders.ActionName), out var actionNameObj))
+        if (headers.TryGetValue(nameof(MonitorHeaders.ActionName), out var actionNameObj) && actionNameObj is byte[] actionNameByteArray)
         {
-            if (actionNameObj is not null)
-            {
-                monitorHeaders.ActionName = actionNameObj.ToString() ?? "";
-            }
+            monitorHeaders.ActionName = Encoding.UTF8.GetString(actionNameByteArray);
         }
 
-        if (headers.TryGetValue(nameof(MonitorHeaders.Source), out var sourceObj))
+        if (headers.TryGetValue(nameof(MonitorHeaders.Source), out var sourceObj) && sourceObj is byte[] sourceByteArray)
         {
-            if (sourceObj is not null)
-            {
-                monitorHeaders.Source = sourceObj.ToString() ?? "";
-            }
+            monitorHeaders.Source = Encoding.UTF8.GetString(sourceByteArray);
         }
 
-        if (headers.TryGetValue(nameof(MonitorHeaders.Destination), out var destinationObj))
+        if (headers.TryGetValue(nameof(MonitorHeaders.Destination), out var destinationObj) && destinationObj is byte[] destinationByteArray)
         {
-            if (destinationObj is not null)
-            {
-                monitorHeaders.Destination = destinationObj.ToString() ?? "";
-            }
+            monitorHeaders.Destination = Encoding.UTF8.GetString(destinationByteArray);
         }
 
         return monitorHeaders;
