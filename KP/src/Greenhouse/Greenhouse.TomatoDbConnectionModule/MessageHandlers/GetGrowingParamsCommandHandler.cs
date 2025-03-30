@@ -25,7 +25,7 @@ namespace Greenhouse.TomatoDbConnectionModule.MessageHandlers
         {
             _logger.LogInformation("Получение параметров выращивания из базы данных");
 
-            await Task.Delay(5000);
+            await Task.Delay(5000, cancellationToken);
 
             var result = await _httpClient.GetAsync($"/tomatos/growing-params/{message.ParamsId}");
             if (!result.IsSuccessStatusCode)
@@ -34,9 +34,9 @@ namespace Greenhouse.TomatoDbConnectionModule.MessageHandlers
                 return;
             }
 
-            var contentStream = await result.Content.ReadAsStreamAsync();
+            var contentStream = await result.Content.ReadAsStreamAsync(cancellationToken);
 
-            var growingParams = JsonSerializer.Deserialize<GrowingParams>(contentStream);
+            var growingParams = await JsonSerializer.DeserializeAsync<GrowingParams>(contentStream, cancellationToken: cancellationToken);
             if (growingParams is null)
             {
                 _logger.LogError("Ошибка сериализации параметров");
