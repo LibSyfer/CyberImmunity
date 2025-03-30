@@ -1,7 +1,8 @@
 using Greenhouse.CoordinatorModule.MessageHandlers;
 using Greenhouse.CoordinatorModule.Services;
 using Greenhouse.MessageBus.Extensions;
-using Greenhouse.MessageBus.Messages;
+using Greenhouse.MessageBus.Messages.SeedPlantingSystem;
+using Greenhouse.MessageBus.Messages.TomatoDbConnectionModule;
 using Greenhouse.MessageBus.RabbitMQ.Extensions;
 using Greenhouse.Share;
 
@@ -11,7 +12,8 @@ builder.Services.AddSingleton<CoordinatorService>();
 
 builder.AddBaseRabbitMqServices()
         .ConfigureClientMessageBus(GreenhouseServicesNames.CoordinatorModule)
-        .RegisterMessageHandler<SendGrowingParams, SendGrowingParamsHandler>();
+        .RegisterMessageHandler<GrowingParamsResultCommand, GrowingParamsResultCommandHandler>()
+        .RegisterMessageHandler<SeedingFinishCommand, SeedingFinishCommandHandler>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

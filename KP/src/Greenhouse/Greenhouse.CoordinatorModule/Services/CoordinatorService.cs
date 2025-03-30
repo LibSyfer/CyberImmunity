@@ -1,5 +1,4 @@
 ﻿using Greenhouse.MessageBus.Abstractions;
-using Greenhouse.MessageBus.Messages;
 using Greenhouse.MessageBus.Messages.TomatoDbConnectionModule;
 using Greenhouse.Share;
 
