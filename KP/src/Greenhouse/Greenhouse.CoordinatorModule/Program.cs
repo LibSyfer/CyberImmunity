@@ -1,5 +1,5 @@
-using Greenhouse.Coordinator.MessageHandlers;
-using Greenhouse.Coordinator.Service;
+using Greenhouse.CoordinatorModule.MessageHandlers;
+using Greenhouse.CoordinatorModule.Services;
 using Greenhouse.MessageBus.Extensions;
 using Greenhouse.MessageBus.Messages;
 using Greenhouse.MessageBus.RabbitMQ.Extensions;

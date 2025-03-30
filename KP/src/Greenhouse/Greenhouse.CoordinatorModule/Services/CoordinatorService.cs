@@ -2,7 +2,7 @@
 using Greenhouse.MessageBus.Abstractions;
 using Greenhouse.MessageBus.Messages;
 
-namespace Greenhouse.Coordinator.Service
+namespace Greenhouse.CoordinatorModule.Services
 {
     public class CoordinatorService
     {

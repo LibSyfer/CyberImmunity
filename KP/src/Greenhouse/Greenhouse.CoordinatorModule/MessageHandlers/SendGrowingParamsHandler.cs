@@ -1,7 +1,7 @@
 using Greenhouse.MessageBus.Abstractions;
 using Greenhouse.MessageBus.Messages;
 
-namespace Greenhouse.Coordinator.MessageHandlers;
+namespace Greenhouse.CoordinatorModule.MessageHandlers;
 
 public class SendGrowingParamsHandler : IIntegrationMessageHandler<SendGrowingParams>
 {

@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Greenhouse.Coordinator", "Greenhouse.Coordinator\Greenhouse.Coordinator.csproj", "{29089C2F-9CAB-7D8C-0A96-54567F08F8D8}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Greenhouse.SecurityMonitor", "Greenhouse.SecurityMonitor\Greenhouse.SecurityMonitor.csproj", "{5B58FBDC-B17B-4DD8-B7BD-1AC9A3A2BD8B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{5A002587-BB21-49AC-9E6B-215258F04872}"
@@ -21,16 +19,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Greenhouse.TomatoDbConnecti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Greenhouse.SeedPlantingModule", "Greenhouse.SeedPlantingModule\Greenhouse.SeedPlantingModule.csproj", "{1D66305F-04B7-6DE8-3D1D-9ED96B0F9D45}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Greenhouse.CoordinatorModule", "Greenhouse.CoordinatorModule\Greenhouse.CoordinatorModule.csproj", "{9B5B67B1-D061-ACD0-C021-91A1994E8E98}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{29089C2F-9CAB-7D8C-0A96-54567F08F8D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{29089C2F-9CAB-7D8C-0A96-54567F08F8D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{29089C2F-9CAB-7D8C-0A96-54567F08F8D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{29089C2F-9CAB-7D8C-0A96-54567F08F8D8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5B58FBDC-B17B-4DD8-B7BD-1AC9A3A2BD8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5B58FBDC-B17B-4DD8-B7BD-1AC9A3A2BD8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B58FBDC-B17B-4DD8-B7BD-1AC9A3A2BD8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -55,17 +51,21 @@ Global
 		{1D66305F-04B7-6DE8-3D1D-9ED96B0F9D45}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D66305F-04B7-6DE8-3D1D-9ED96B0F9D45}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D66305F-04B7-6DE8-3D1D-9ED96B0F9D45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B5B67B1-D061-ACD0-C021-91A1994E8E98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B5B67B1-D061-ACD0-C021-91A1994E8E98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B5B67B1-D061-ACD0-C021-91A1994E8E98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B5B67B1-D061-ACD0-C021-91A1994E8E98}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{29089C2F-9CAB-7D8C-0A96-54567F08F8D8} = {5A002587-BB21-49AC-9E6B-215258F04872}
 		{1FA47018-05D4-4029-8171-47C032D14987} = {792000AB-6770-43BB-AB5E-93F552C0EE32}
 		{FF8A113B-E9C9-46F9-87E3-E7761CB5A3A3} = {792000AB-6770-43BB-AB5E-93F552C0EE32}
 		{BF65A0E9-B90B-4957-BBAF-AB5487AE08D3} = {5A002587-BB21-49AC-9E6B-215258F04872}
 		{4D2C35EC-025F-44DB-B9E7-39BA604B8C8F} = {5A002587-BB21-49AC-9E6B-215258F04872}
 		{1D66305F-04B7-6DE8-3D1D-9ED96B0F9D45} = {5A002587-BB21-49AC-9E6B-215258F04872}
+		{9B5B67B1-D061-ACD0-C021-91A1994E8E98} = {5A002587-BB21-49AC-9E6B-215258F04872}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BDC28687-8FE3-42C8-BCA6-585469B91852}

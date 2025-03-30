@@ -1,4 +1,4 @@
-﻿namespace Greenhouse.Coordinator.Models
+﻿namespace Greenhouse.CoordinatorModule.Models
 {
     public class GrowingParams
     {
