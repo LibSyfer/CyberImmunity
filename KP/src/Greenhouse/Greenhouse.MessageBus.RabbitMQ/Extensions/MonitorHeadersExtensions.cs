@@ -13,19 +13,28 @@ public static class MonitorHeadersExtensions
     {
         var monitorHeaders = new MonitorHeaders();
 
-        var actionNameObj = headers[nameof(MonitorHeaders.ActionName)];
-        if (actionNameObj is not null) {
-            monitorHeaders.ActionName = (string)actionNameObj;
+        if (headers.TryGetValue(nameof(MonitorHeaders.ActionName), out var actionNameObj))
+        {
+            if (actionNameObj is not null)
+            {
+                monitorHeaders.ActionName = actionNameObj.ToString() ?? "";
+            }
         }
 
-        var sourceObj = headers[nameof(MonitorHeaders.Source)];
-        if (sourceObj is not null) {
-            monitorHeaders.Source = (string)sourceObj;
+        if (headers.TryGetValue(nameof(MonitorHeaders.Source), out var sourceObj))
+        {
+            if (sourceObj is not null)
+            {
+                monitorHeaders.Source = sourceObj.ToString() ?? "";
+            }
         }
 
-        var destinationObj = headers[nameof(MonitorHeaders.Destination)];
-        if (destinationObj is not null) {
-            monitorHeaders.Destination = (string)destinationObj;
+        if (headers.TryGetValue(nameof(MonitorHeaders.Destination), out var destinationObj))
+        {
+            if (destinationObj is not null)
+            {
+                monitorHeaders.Destination = destinationObj.ToString() ?? "";
+            }
         }
 
         return monitorHeaders;
