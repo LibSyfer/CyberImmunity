@@ -1,6 +1,7 @@
-﻿using Greenhouse.Coordinator.Models;
-using Greenhouse.MessageBus.Abstractions;
+﻿using Greenhouse.MessageBus.Abstractions;
 using Greenhouse.MessageBus.Messages;
+using Greenhouse.MessageBus.Messages.TomatoDbConnectionModule;
+using Greenhouse.Share;
 
 namespace Greenhouse.CoordinatorModule.Services
 {
@@ -36,14 +37,14 @@ namespace Greenhouse.CoordinatorModule.Services
 
                 _currentGrowingTask = Task.Run(async () =>
                 {
-                    _logger.LogInformation("Start growing");
+                    _logger.LogInformation("Начало процесса выращивания");
 
-                    _logger.LogInformation("Getting growing params.");
-                    await _messageBus.SendAsync("DatabaseNetModule", new GetGrowingParams
+                    _logger.LogInformation("Получение параметров выращивания");
+                    await _messageBus.SendAsync(GreenhouseServicesNames.TomatoDbConnectionModule, new GetGrowingParamsCommand
                     {
                         ParamsId = paramsId
-                    });
-                });
+                    }, _cancellationTokenSource.Token);
+                }, _cancellationTokenSource.Token);
             }
 
             return true;

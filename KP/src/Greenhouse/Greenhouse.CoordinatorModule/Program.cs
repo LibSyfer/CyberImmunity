@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<CoordinatorService>();
 
 builder.AddBaseRabbitMqServices()
-        .ConfigureClientMessageBus(Services.CoordinatorModule)
+        .ConfigureClientMessageBus(GreenhouseServicesNames.CoordinatorModule)
         .RegisterMessageHandler<SendGrowingParams, SendGrowingParamsHandler>();
 
 builder.Services.AddEndpointsApiExplorer();

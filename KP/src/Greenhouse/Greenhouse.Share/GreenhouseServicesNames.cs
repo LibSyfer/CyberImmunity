@@ -1,6 +1,6 @@
 ﻿namespace Greenhouse.Share
 {
-    public class Services
+    public class GreenhouseServicesNames
     {
         public const string CoordinatorModule = "CoordinatorModule";
 

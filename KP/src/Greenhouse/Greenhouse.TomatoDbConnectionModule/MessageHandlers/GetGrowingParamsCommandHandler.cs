@@ -43,7 +43,7 @@ namespace Greenhouse.TomatoDbConnectionModule.MessageHandlers
                 return;
             }
 
-            await _messageBus.SendAsync(Services.CoordinatorModule, new GrowingParamsResultCommand
+            await _messageBus.SendAsync(GreenhouseServicesNames.CoordinatorModule, new GrowingParamsResultCommand
             {
                 TomatoId = growingParams.TomatoId,
                 LightIntensity = growingParams.LightIntensity,

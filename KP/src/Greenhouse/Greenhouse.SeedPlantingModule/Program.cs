@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<SeedingStateService>();
 
 builder.AddBaseRabbitMqServices()
-        .ConfigureClientMessageBus(Services.SeedPlantingModule)
+        .ConfigureClientMessageBus(GreenhouseServicesNames.SeedPlantingModule)
         .RegisterMessageHandler<StartSeedingCommand, StartSeedingCommandHandler>();
 
 builder.Services.AddEndpointsApiExplorer();
@@ -71,7 +71,7 @@ app.MapPost("/finish-seeding", async (SeedingStateService seedingStateService, I
     {
         seedingStateService.FinishSeeding();
 
-        await messageBus.SendAsync(Services.CoordinatorModule, new SeedingFinishCommand(), cancellationToken);
+        await messageBus.SendAsync(GreenhouseServicesNames.CoordinatorModule, new SeedingFinishCommand(), cancellationToken);
 
         return Results.Ok("Закончилась высадка семян");
     }

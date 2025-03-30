@@ -13,7 +13,7 @@ builder.Services.AddHttpClient<GetGrowingParamsCommandHandler>((sp, client) =>
 });
 
 builder.AddBaseRabbitMqServices()
-        .ConfigureClientMessageBus(Services.TomatoDbConnectionModule)
+        .ConfigureClientMessageBus(GreenhouseServicesNames.TomatoDbConnectionModule)
         .RegisterMessageHandler<GetGrowingParamsCommand, GetGrowingParamsCommandHandler>();
 
 var host = builder.Build();
