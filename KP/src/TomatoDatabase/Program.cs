@@ -87,18 +87,18 @@ app.MapGet("/tomatos", () =>
     return tomatos;
 });
 
-app.MapGet("/tomatos/{tomatoId}/growing-params", (Guid tomatoId) =>
+app.MapGet("/tomatos/growing-params", () =>
 {
-    logger.LogInformation($"[GET] /tomatos/{tomatoId}/growing-params");
+    logger.LogInformation($"[GET] /tomatos/growing-params");
 
-    var growingParamsList = tomatoGrowingParams.Where(e => e.TomatoId == tomatoId).ToList();
+    var growingParamsList = tomatoGrowingParams.ToList();
     return Results.Ok(growingParamsList);
 });
 
-app.MapGet("/tomatos/{tomatoId}/growing-params/{paramsId}", (Guid tomatoId, Guid paramsId) =>
+app.MapGet("/tomatos/growing-params/{paramsId}", (Guid paramsId) =>
 {
-    logger.LogInformation($"[GET] /tomatos/{tomatoId}/growing-params/{paramsId}");
-    var growingParams = tomatoGrowingParams.Where(e => e.TomatoId == tomatoId && e.Id == paramsId).FirstOrDefault();
+    logger.LogInformation($"[GET] /tomatos/growing-params/{paramsId}");
+    var growingParams = tomatoGrowingParams.Where(e => e.Id == paramsId).FirstOrDefault();
     if (growingParams == null)
     {
         logger.LogInformation($"Not found");
