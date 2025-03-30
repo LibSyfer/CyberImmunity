@@ -6,7 +6,7 @@ using Greenhouse.TomatoDbConnectionModule.MessageHandlers;
 
 var builder = Host.CreateApplicationBuilder(args);
 
-var dbConnection = builder.Configuration.GetConnectionString("tomatoDb") ?? throw new ArgumentNullException("Db connection string");
+var dbConnection = builder.Configuration.GetConnectionString("TomatoDb") ?? throw new ArgumentNullException("Db connection string");
 builder.Services.AddHttpClient<GetGrowingParamsCommandHandler>((sp, client) =>
 {
     client.BaseAddress = new Uri(dbConnection);
