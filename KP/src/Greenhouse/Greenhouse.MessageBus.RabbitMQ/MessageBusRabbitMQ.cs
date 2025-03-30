@@ -43,7 +43,7 @@ namespace Greenhouse.MessageBus.RabbitMQ
 
             using (var channel = await _persistentConnection.CreateChannelAsync(cancellationToken: cancellationToken))
             {
-                var routingKey = typeof(IntegrationMessage).Name;
+                var routingKey = message.GetType().Name;
                 var monitorHeaders = new MonitorHeadersExtensions.MonitorHeaders() {
                     ActionName = routingKey,
                     Source = _exchangeName,
