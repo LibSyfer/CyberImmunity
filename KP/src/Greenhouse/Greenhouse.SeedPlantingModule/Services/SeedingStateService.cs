@@ -1,6 +1,6 @@
-﻿using Greenhouse.SeedPlantingSystem.Models;
+﻿using Greenhouse.SeedPlantingModule.Models;
 
-namespace Greenhouse.SeedPlantingSystem.Services
+namespace Greenhouse.SeedPlantingModule.Services
 {
     public class SeedingStateService
     {

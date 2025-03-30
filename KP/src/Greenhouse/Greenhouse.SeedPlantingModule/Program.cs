@@ -2,9 +2,9 @@ using Greenhouse.MessageBus.Abstractions;
 using Greenhouse.MessageBus.Extensions;
 using Greenhouse.MessageBus.Messages.SeedPlantingSystem;
 using Greenhouse.MessageBus.RabbitMQ.Extensions;
-using Greenhouse.SeedPlantingSystem.MessageHandlers;
-using Greenhouse.SeedPlantingSystem.Models;
-using Greenhouse.SeedPlantingSystem.Services;
+using Greenhouse.SeedPlantingModule.MessageHandlers;
+using Greenhouse.SeedPlantingModule.Models;
+using Greenhouse.SeedPlantingModule.Services;
 using Greenhouse.Share;
 
 var builder = WebApplication.CreateBuilder(args);

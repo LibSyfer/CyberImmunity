@@ -1,4 +1,4 @@
-﻿namespace Greenhouse.SeedPlantingSystem.Models
+﻿namespace Greenhouse.SeedPlantingModule.Models
 {
     public enum SeedingState
     {

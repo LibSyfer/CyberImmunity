@@ -15,11 +15,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Greenhouse.MessageBus", "Gr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Greenhouse.MessageBus.RabbitMQ", "Greenhouse.MessageBus.RabbitMQ\Greenhouse.MessageBus.RabbitMQ.csproj", "{FF8A113B-E9C9-46F9-87E3-E7761CB5A3A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Greenhouse.SeedPlantingSystem", "Greenhouse.SeedPlantingSystem\Greenhouse.SeedPlantingSystem.csproj", "{0125E2B9-DCB4-489E-88C1-F61FAC597E7A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Greenhouse.Share", "Greenhouse.Share\Greenhouse.Share.csproj", "{BF65A0E9-B90B-4957-BBAF-AB5487AE08D3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Greenhouse.TomatoDbConnectionModule", "Greenhouse.TomatoDbConnectionModule\Greenhouse.TomatoDbConnectionModule.csproj", "{4D2C35EC-025F-44DB-B9E7-39BA604B8C8F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Greenhouse.SeedPlantingModule", "Greenhouse.SeedPlantingModule\Greenhouse.SeedPlantingModule.csproj", "{1D66305F-04B7-6DE8-3D1D-9ED96B0F9D45}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,10 +43,6 @@ Global
 		{FF8A113B-E9C9-46F9-87E3-E7761CB5A3A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF8A113B-E9C9-46F9-87E3-E7761CB5A3A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF8A113B-E9C9-46F9-87E3-E7761CB5A3A3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0125E2B9-DCB4-489E-88C1-F61FAC597E7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0125E2B9-DCB4-489E-88C1-F61FAC597E7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0125E2B9-DCB4-489E-88C1-F61FAC597E7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0125E2B9-DCB4-489E-88C1-F61FAC597E7A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BF65A0E9-B90B-4957-BBAF-AB5487AE08D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BF65A0E9-B90B-4957-BBAF-AB5487AE08D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF65A0E9-B90B-4957-BBAF-AB5487AE08D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -55,6 +51,10 @@ Global
 		{4D2C35EC-025F-44DB-B9E7-39BA604B8C8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D2C35EC-025F-44DB-B9E7-39BA604B8C8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D2C35EC-025F-44DB-B9E7-39BA604B8C8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D66305F-04B7-6DE8-3D1D-9ED96B0F9D45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D66305F-04B7-6DE8-3D1D-9ED96B0F9D45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D66305F-04B7-6DE8-3D1D-9ED96B0F9D45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D66305F-04B7-6DE8-3D1D-9ED96B0F9D45}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -63,9 +63,9 @@ Global
 		{29089C2F-9CAB-7D8C-0A96-54567F08F8D8} = {5A002587-BB21-49AC-9E6B-215258F04872}
 		{1FA47018-05D4-4029-8171-47C032D14987} = {792000AB-6770-43BB-AB5E-93F552C0EE32}
 		{FF8A113B-E9C9-46F9-87E3-E7761CB5A3A3} = {792000AB-6770-43BB-AB5E-93F552C0EE32}
-		{0125E2B9-DCB4-489E-88C1-F61FAC597E7A} = {5A002587-BB21-49AC-9E6B-215258F04872}
 		{BF65A0E9-B90B-4957-BBAF-AB5487AE08D3} = {5A002587-BB21-49AC-9E6B-215258F04872}
 		{4D2C35EC-025F-44DB-B9E7-39BA604B8C8F} = {5A002587-BB21-49AC-9E6B-215258F04872}
+		{1D66305F-04B7-6DE8-3D1D-9ED96B0F9D45} = {5A002587-BB21-49AC-9E6B-215258F04872}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BDC28687-8FE3-42C8-BCA6-585469B91852}

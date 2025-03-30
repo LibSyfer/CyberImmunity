@@ -1,8 +1,8 @@
 ﻿using Greenhouse.MessageBus.Abstractions;
 using Greenhouse.MessageBus.Messages.SeedPlantingSystem;
-using Greenhouse.SeedPlantingSystem.Services;
+using Greenhouse.SeedPlantingModule.Services;
 
-namespace Greenhouse.SeedPlantingSystem.MessageHandlers
+namespace Greenhouse.SeedPlantingModule.MessageHandlers
 {
     public class StartSeedingCommandHandler : IIntegrationMessageHandler<StartSeedingCommand>
     {
