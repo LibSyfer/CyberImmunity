@@ -60,7 +60,7 @@ namespace Greenhouse.MessageBus.RabbitMQ
                     cancellationToken: cancellationToken
                     );
 
-                var stringMessage = JsonSerializer.Serialize(message);
+                var stringMessage = JsonSerializer.Serialize(message, message.GetType());
                 var body = Encoding.UTF8.GetBytes(stringMessage);
 
                 await channel.BasicPublishAsync(
