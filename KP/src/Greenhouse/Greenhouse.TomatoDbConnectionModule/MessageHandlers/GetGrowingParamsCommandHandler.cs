@@ -2,6 +2,7 @@
 using Greenhouse.MessageBus.Messages.TomatoDbConnectionModule;
 using Greenhouse.Share;
 using Greenhouse.TomatoDbConnectionModule.Models;
+using Microsoft.Extensions.Options;
 using System.Text.Json;
 
 namespace Greenhouse.TomatoDbConnectionModule.MessageHandlers
@@ -11,14 +12,17 @@ namespace Greenhouse.TomatoDbConnectionModule.MessageHandlers
         private readonly ILogger<GetGrowingParamsCommandHandler> _logger;
         private readonly IMessageBus _messageBus;
         private readonly HttpClient _httpClient;
+        private readonly string _dbHost;
         
         public GetGrowingParamsCommandHandler(ILogger<GetGrowingParamsCommandHandler> logger,
             IMessageBus messageBus,
-            HttpClient httpClient)
+            HttpClient httpClient,
+            IOptions<TomatoDbSettings> opt)
         {
             _logger = logger;
             _messageBus = messageBus;
             _httpClient = httpClient;
+            _dbHost = opt.Value.Host;
         }
 
         public async Task Handle(GetGrowingParamsCommand message, CancellationToken cancellationToken = default)
@@ -27,16 +31,16 @@ namespace Greenhouse.TomatoDbConnectionModule.MessageHandlers
 
             await Task.Delay(5000, cancellationToken);
 
-            var result = await _httpClient.GetAsync($"/tomatos/growing-params/{message.ParamsId}");
+            var result = await _httpClient.GetAsync($"{_dbHost}/tomatos/growing-params/{message.ParamsId}");
             if (!result.IsSuccessStatusCode)
             {
                 _logger.LogError("Ошибка получения параметров выращивания");
                 return;
             }
 
-            var contentStream = await result.Content.ReadAsStreamAsync(cancellationToken);
+            var contentString = await result.Content.ReadAsStringAsync(cancellationToken);
 
-            var growingParams = await JsonSerializer.DeserializeAsync<GrowingParams>(contentStream, cancellationToken: cancellationToken);
+            var growingParams = JsonSerializer.Deserialize<GrowingParams>(contentString, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
             if (growingParams is null)
             {
                 _logger.LogError("Ошибка сериализации параметров");
