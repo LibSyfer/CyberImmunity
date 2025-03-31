@@ -7,5 +7,7 @@
         public const string SeedPlantingModule = "SeedPlantingModule";
 
         public const string TomatoDbConnectionModule = "TomatoDbConnectionModule";
+
+        public const string ClimateControlModule = "ClimateControlModule";
     }
 }

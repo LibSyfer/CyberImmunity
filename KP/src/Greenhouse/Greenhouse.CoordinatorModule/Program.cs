@@ -1,7 +1,7 @@
 using Greenhouse.CoordinatorModule.MessageHandlers;
 using Greenhouse.CoordinatorModule.Services;
 using Greenhouse.MessageBus.Extensions;
-using Greenhouse.MessageBus.Messages.SeedPlantingSystem;
+using Greenhouse.MessageBus.Messages.SeedPlantingModule;
 using Greenhouse.MessageBus.Messages.TomatoDbConnectionModule;
 using Greenhouse.MessageBus.RabbitMQ.Extensions;
 using Greenhouse.Share;

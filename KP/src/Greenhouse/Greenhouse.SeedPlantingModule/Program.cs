@@ -1,6 +1,6 @@
 using Greenhouse.MessageBus.Abstractions;
 using Greenhouse.MessageBus.Extensions;
-using Greenhouse.MessageBus.Messages.SeedPlantingSystem;
+using Greenhouse.MessageBus.Messages.SeedPlantingModule;
 using Greenhouse.MessageBus.RabbitMQ.Extensions;
 using Greenhouse.SeedPlantingModule.MessageHandlers;
 using Greenhouse.SeedPlantingModule.Models;

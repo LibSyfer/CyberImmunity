@@ -1,5 +1,5 @@
 ﻿using Greenhouse.MessageBus.Abstractions;
-using Greenhouse.MessageBus.Messages.SeedPlantingSystem;
+using Greenhouse.MessageBus.Messages.SeedPlantingModule;
 using Greenhouse.SeedPlantingModule.Services;
 
 namespace Greenhouse.SeedPlantingModule.MessageHandlers

@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Greenhouse.SeedPlantingModu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Greenhouse.CoordinatorModule", "Greenhouse.CoordinatorModule\Greenhouse.CoordinatorModule.csproj", "{9B5B67B1-D061-ACD0-C021-91A1994E8E98}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Greenhouse.ClimateControlModule", "Greenhouse.ClimateControlModule\Greenhouse.ClimateControlModule.csproj", "{D2B8DAB4-353E-48AE-9630-43BB7DB7AAC7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{9B5B67B1-D061-ACD0-C021-91A1994E8E98}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B5B67B1-D061-ACD0-C021-91A1994E8E98}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B5B67B1-D061-ACD0-C021-91A1994E8E98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2B8DAB4-353E-48AE-9630-43BB7DB7AAC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2B8DAB4-353E-48AE-9630-43BB7DB7AAC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2B8DAB4-353E-48AE-9630-43BB7DB7AAC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2B8DAB4-353E-48AE-9630-43BB7DB7AAC7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +72,7 @@ Global
 		{4D2C35EC-025F-44DB-B9E7-39BA604B8C8F} = {5A002587-BB21-49AC-9E6B-215258F04872}
 		{1D66305F-04B7-6DE8-3D1D-9ED96B0F9D45} = {5A002587-BB21-49AC-9E6B-215258F04872}
 		{9B5B67B1-D061-ACD0-C021-91A1994E8E98} = {5A002587-BB21-49AC-9E6B-215258F04872}
+		{D2B8DAB4-353E-48AE-9630-43BB7DB7AAC7} = {5A002587-BB21-49AC-9E6B-215258F04872}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BDC28687-8FE3-42C8-BCA6-585469B91852}
