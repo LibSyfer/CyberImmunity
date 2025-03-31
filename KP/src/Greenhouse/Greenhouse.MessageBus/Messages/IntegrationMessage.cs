@@ -2,10 +2,11 @@
 {
     public class IntegrationMessage
     {
-        public string OperationName { get; set; }
+        public Guid Id { get; set; }
 
-        public string Source { get; set; }
-
-        public string Destination { get; set; }
+        public IntegrationMessage()
+        {
+            Id = Guid.NewGuid();
+        }
     }
 }
