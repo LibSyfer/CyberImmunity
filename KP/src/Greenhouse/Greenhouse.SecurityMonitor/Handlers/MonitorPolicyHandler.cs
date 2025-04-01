@@ -1,4 +1,5 @@
 ﻿using Greenhouse.MessageBus.Abstractions;
+using Greenhouse.MessageBus.Messages.ClimateControlModule;
 using Greenhouse.MessageBus.Messages.SeedPlantingModule;
 using Greenhouse.MessageBus.Messages.TomatoDbConnectionModule;
 using Greenhouse.MessageBus.RabbitMQ.Extensions;
@@ -42,6 +43,11 @@ namespace Greenhouse.SecurityMonitor.Handlers
             if (monitorHeaders.ActionName.Equals(nameof(SeedingFinishCommand), StringComparison.OrdinalIgnoreCase)
                 && monitorHeaders.Source.Equals(GreenhouseServicesNames.SeedPlantingModule, StringComparison.OrdinalIgnoreCase)
                 && monitorHeaders.Destination.Equals(GreenhouseServicesNames.CoordinatorModule, StringComparison.OrdinalIgnoreCase))
+                authorizeAction = true;
+
+            if (monitorHeaders.ActionName.Equals(nameof(SetClimateControlParamsCommand), StringComparison.OrdinalIgnoreCase)
+                && monitorHeaders.Source.Equals(GreenhouseServicesNames.CoordinatorModule, StringComparison.OrdinalIgnoreCase)
+                && monitorHeaders.Destination.Equals(GreenhouseServicesNames.ClimateControlModule, StringComparison.OrdinalIgnoreCase))
                 authorizeAction = true;
 
             if (authorizeAction)
