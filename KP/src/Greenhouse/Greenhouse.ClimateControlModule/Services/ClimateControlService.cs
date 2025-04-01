@@ -57,7 +57,7 @@ namespace Greenhouse.ClimateControlModule.Services
                     temperatureСhange = GetRandomDouble(-0.25, 0.25);
                 }
 
-                double humidityСhange = 0; ;
+                double humidityСhange = 0;
                 if (_currentParams.HumidityLevel > _necessaryParams.HumidityLevel)
                 {
                     humidityСhange = GetRandomDouble(-0.375, 0.125);
