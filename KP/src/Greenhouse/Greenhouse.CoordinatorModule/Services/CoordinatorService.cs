@@ -1,4 +1,5 @@
-﻿using Greenhouse.MessageBus.Abstractions;
+﻿using Greenhouse.CoordinatorModule.Models;
+using Greenhouse.MessageBus.Abstractions;
 using Greenhouse.MessageBus.Messages.TomatoDbConnectionModule;
 using Greenhouse.Share;
 
@@ -11,6 +12,8 @@ namespace Greenhouse.CoordinatorModule.Services
         private Task? _currentGrowingTask;
         private CancellationTokenSource? _cancellationTokenSource;
         private readonly object _lock = new();
+
+        private GrowingParams? _growingParams;
 
         private readonly IMessageBus _messageBus;
 
@@ -48,5 +51,12 @@ namespace Greenhouse.CoordinatorModule.Services
 
             return true;
         }
+
+        public void SetGrowingParams(GrowingParams growingParams)
+        {
+            _growingParams = growingParams;
+        }
+
+        public GrowingParams? GrowingParams => _growingParams;
     }
 }
