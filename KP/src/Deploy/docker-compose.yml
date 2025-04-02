@@ -1,0 +1,16 @@
+name: greenhouse-system
+
+services:
+  tomato-database:
+    build:
+      context: ..
+      dockerfile: TomatoDatabase/Dockerfile
+    ports:
+      - 8070:8080
+    networks:
+      - greenhouse-system-network
+        
+networks:
+  greenhouse-system-network:
+    name: greenhouse-system-network
+    driver: bridge
