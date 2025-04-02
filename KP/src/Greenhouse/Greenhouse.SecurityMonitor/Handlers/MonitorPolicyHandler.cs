@@ -20,8 +20,6 @@ namespace Greenhouse.SecurityMonitor.Handlers
 
         public async Task Handle(IDictionary<string, object?> metadata, ReadOnlyMemory<byte> payload, CancellationToken cancellationToken = default)
         {
-            _logger.LogInformation($"Получено сообщение, проверка политик...");
-
             var monitorHeaders = metadata.ReadMonitorHeaders();
             var authorizeAction = false;
 
