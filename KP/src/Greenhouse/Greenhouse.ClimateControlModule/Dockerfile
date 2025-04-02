@@ -10,22 +10,22 @@ WORKDIR /app
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Greenhouse.SecurityMonitor/Greenhouse.SecurityMonitor.csproj", "Greenhouse.SecurityMonitor/"]
+COPY ["Greenhouse.ClimateControlModule/Greenhouse.ClimateControlModule.csproj", "Greenhouse.ClimateControlModule/"]
 COPY ["Greenhouse.MessageBus.RabbitMQ/Greenhouse.MessageBus.RabbitMQ.csproj", "Greenhouse.MessageBus.RabbitMQ/"]
 COPY ["Greenhouse.MessageBus/Greenhouse.MessageBus.csproj", "Greenhouse.MessageBus/"]
 COPY ["Greenhouse.Share/Greenhouse.Share.csproj", "Greenhouse.Share/"]
-RUN dotnet restore "./Greenhouse.SecurityMonitor/Greenhouse.SecurityMonitor.csproj"
+RUN dotnet restore "./Greenhouse.ClimateControlModule/Greenhouse.ClimateControlModule.csproj"
 COPY . .
-WORKDIR "/src/Greenhouse.SecurityMonitor"
-RUN dotnet build "./Greenhouse.SecurityMonitor.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/Greenhouse.ClimateControlModule"
+RUN dotnet build "./Greenhouse.ClimateControlModule.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # Этот этап используется для публикации проекта службы, который будет скопирован на последний этап
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./Greenhouse.SecurityMonitor.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./Greenhouse.ClimateControlModule.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 # Этот этап используется в рабочей среде или при запуске из VS в обычном режиме (по умолчанию, когда конфигурация отладки не используется)
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Greenhouse.SecurityMonitor.dll"]
+ENTRYPOINT ["dotnet", "Greenhouse.ClimateControlModule.dll"]
