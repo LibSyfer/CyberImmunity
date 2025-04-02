@@ -1,30 +1,92 @@
+name: Greenhouse
+
 services:
-  rabbitmq-brocker:
+  security-brocker:
     image: rabbitmq:4.0.7-management
-    hostname: rabbitmq-brocker
+    hostname: security-brocker
     ports:
       - 15672:15672
       - 5672:5672
+    networks:
+      - greenhouse-network
     healthcheck:
       test: ["CMD", "rabbitmq-diagnostics", "check_port_connectivity"]
       interval: 5s
       timeout: 3s
       retries: 10
 
-  greenhouse.coordinator:
+
+  coordinator-module:
     build:
       context: ..
-      dockerfile: Greenhouse.Coordinator/Dockerfile
+      dockerfile: Greenhouse.CoordinatorModule/Dockerfile
+    ports:
+      - 8080:8080
+    environment:
+        MessageBusConnection__RabbitMQ__Host: security-brocker
+    networks:
+      - greenhouse-system-network
+      - greenhouse-network
     depends_on:
-        rabbitmq-brocker:
+        security-brocker:
             condition: service_healthy
 
-  greenhouse.security-monitor:
+  tomato-db-connection-module:
+    build:
+      context: ..
+      dockerfile: Greenhouse.TomatoDbConnectionModule/Dockerfile
+    environment:
+        MessageBusConnection__RabbitMQ__Host: security-brocker
+        ConnectionStrings__TomatoDb: http://tomato-database:8080
+    networks:
+      - greenhouse-system-network
+      - greenhouse-network
+    depends_on:
+        security-brocker:
+            condition: service_healthy
+
+  seed-planting-module:
+    build:
+      context: ..
+      dockerfile: Greenhouse.SeedPlantingModule/Dockerfile
+    ports:
+      - 8081:8080
+    environment:
+        MessageBusConnection__RabbitMQ__Host: security-brocker
+    networks:
+      - greenhouse-network
+    depends_on:
+        security-brocker:
+            condition: service_healthy
+
+  climate-control-module:
+    build:
+      context: ..
+      dockerfile: Greenhouse.ClimateControlModule/Dockerfile
+    environment:
+        MessageBusConnection__RabbitMQ__Host: security-brocker
+    networks:
+      - greenhouse-network
+    depends_on:
+        security-brocker:
+            condition: service_healthy
+
+  security-monitor:
     build:
       context: ..
       dockerfile: Greenhouse.SecurityMonitor/Dockerfile
     environment:
-        MessageBusConnection__RabbitMQ__Host: rabbitmq-brocker
+        MessageBusConnection__RabbitMQ__Host: security-brocker
+    networks:
+      - greenhouse-network
     depends_on:
-        rabbitmq-brocker:
+        security-brocker:
             condition: service_healthy
+
+networks:
+  greenhouse-system-network:
+    external: true
+    name: greenhouse-system-network
+
+  greenhouse-network:
+    driver: bridge
