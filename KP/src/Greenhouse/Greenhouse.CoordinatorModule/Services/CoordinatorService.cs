@@ -41,6 +41,7 @@ namespace Greenhouse.CoordinatorModule.Services
                 {
                     _logger.LogInformation("Начало процесса выращивания");
 
+                    await Task.Delay(5000, _cancellationTokenSource.Token);
                     _logger.LogInformation("Получение параметров выращивания");
                     await _messageBus.SendAsync(GreenhouseServicesNames.TomatoDbConnectionModule, new GetGrowingParamsCommand
                     {

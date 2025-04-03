@@ -25,13 +25,13 @@ namespace Greenhouse.CoordinatorModule.MessageHandlers
         {
             _logger.LogInformation("Высадка семян завершена, инициализация настройки параметров выращивания...");
 
-            await Task.Delay(5000, cancellationToken);
-
             if (_coordinatorService.GrowingParams is null)
             {
                 _logger.LogError("Выращивание прервано. Параметры выращивания не получены, нельзя установить параметры среды");
                 return;
             }
+
+            await Task.Delay(5000, cancellationToken);
 
             _logger.LogInformation("Отправка параметров климата в модуль климат контроля...");
             var growingParams = _coordinatorService.GrowingParams;

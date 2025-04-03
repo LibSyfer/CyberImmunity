@@ -23,7 +23,11 @@ namespace Greenhouse.CoordinatorModule.MessageHandlers
 
         public async Task Handle(GrowingParamsResultCommand message, CancellationToken cancellationToken = default)
         {
-            _logger.LogInformation("Получены параметры выращивания, инициализация высадки семян...");
+            _logger.LogInformation("Получены параметры выращивания.");
+
+            await Task.Delay(5000, cancellationToken);
+
+            _logger.LogInformation("Инициализация высадки семян...");
             _coordinatorService.SetGrowingParams(new Models.GrowingParams
             {
                 TomatoId = message.TomatoId,
