@@ -1,5 +1,4 @@
-﻿
-using Greenhouse.ClimateControlModule.Models;
+﻿using Greenhouse.ClimateControlModule.Models;
 
 namespace Greenhouse.ClimateControlModule.Services
 {

@@ -7,7 +7,7 @@ using Greenhouse.Share;
 
 var builder = Host.CreateApplicationBuilder(args);
 builder.Services.AddSingleton<ClimateControlService>();
-builder.Services.AddHostedService<ClimateControlService>();
+builder.Services.AddHostedService(sp => sp.GetRequiredService<ClimateControlService>());
 
 builder.AddBaseRabbitMqServices()
         .ConfigureClientMessageBus(GreenhouseServicesNames.ClimateControlModule)
